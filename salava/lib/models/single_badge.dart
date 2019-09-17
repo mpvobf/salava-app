@@ -168,7 +168,7 @@ class SingleBadge {
       };
 
   static Future<SingleBadge> fetchByBadgeId(int badgeId) async {
-    var uri = 'http://10.0.2.2:5000/obpv1/badge/info/' + badgeId.toString();
+    var uri = 'http://10.0.2.2:5000/obpv1/badge/info/$badgeId';
     final response = await http.get(uri);
 
     if (response.statusCode == 200) {
