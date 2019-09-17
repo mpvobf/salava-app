@@ -21,8 +21,13 @@ class _BadgeState extends State<Badge> {
       floatingActionButton: new FloatingActionButton(
           child: new Text('Logout'),
           onPressed: () {
-            auth.logout().then(
-                (_) => Navigator.of(context).pushReplacementNamed('/login'));
+            auth.logout().then((result) {
+              if (result) {
+                Navigator.of(context).pushReplacementNamed('/login');
+              } else {
+                print("Can't log out");
+              }
+            });
           }),
       body: FutureBuilder<List<Badges>>(
         future: Badges.fetchBadges(),
