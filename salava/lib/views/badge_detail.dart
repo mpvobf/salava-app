@@ -11,8 +11,8 @@ class BadgeDetail extends StatelessWidget {
   BadgeDetail(this._badgeId);
 
   _deleteBadge() async {
-    final String uri = uriPrefix + 'obpv1/badge/' + _badgeId.toString();
-    var response = await http.delete(uri);
+    final String uri = uriPrefix + 'obpv1/badge/$_badgeId';
+    await http.delete(uri);
   }
 
   @override
@@ -46,7 +46,9 @@ class BadgeDetail extends StatelessWidget {
                           .map((content) => content.imageFile)
                           .toString()
                           .replaceAll('(', '')
-                          .replaceAll(')', '')),
+                          .replaceAll(')', '')
+                          .substring(0, 81)),
+
                   Container(
                     child: RaisedButton(
                         child: Text("Delete Badge"),
