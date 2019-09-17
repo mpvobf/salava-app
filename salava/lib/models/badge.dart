@@ -71,8 +71,12 @@ class Badges {
       issuerVerified: json["issuer_verified"]);
 
   static Future<List<Badges>> fetchBadges() async {
-    var uri = 'http://10.0.2.2:5000/obpv1/badge';
-    final response = await http.get(uri);
+    var badges = Uri.http("10.0.2.2:5000", "/obpv1/badge");
+    final Map<String, String> headers = {"Authorization": 'Bearer '};
+    final response = await http.get(badges, headers: headers);
+
+    print('Badge');
+    print(response.statusCode);
 
     if (response.statusCode == 200) {
       final items = json.decode(response.body).cast<Map<String, dynamic>>();
